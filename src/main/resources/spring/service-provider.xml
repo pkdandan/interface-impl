@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- provider infomration. used for calculate dependency -->
+	<dubbo:application name="reward-provider" />
+	<!-- using zookeeper register center to expose service address -->
+	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" />
+	 <!--using multicast boardcast registation to expose service address,it is fit for development phaseF -->  
+         <!--<dubbo:registry address="multicast://10.57.41.19:1234" />-->  
+	<!-- to expose the service through duboo protocol with port 20880 -->
+	<dubbo:protocol name="dubbo" port="20880" />
+
+	<!-- user service interface -->
+	<dubbo:service interface="org.reward.service.IBannerService"
+		ref="bannerService" />
+</beans>
